@@ -1,45 +1,55 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour{
     public static GameManager Instance;
 
-    private string _scoreString;
-    private int _score = 0;
     public int LevelGame => _levelGame;
     private int _levelGame = 1;
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private CanvasGroup curtain;
+    private string _scoreString;
+    private int _score = 0;
 
     private int _amountOfItems;
 
+    [SerializeField] private Image restartGamePanel;
+    [SerializeField] private TextMeshProUGUI restartText;
 
-    private void Start(){
+    [SerializeField] Volume volume;
+    private ColorAdjustments CA;
+    private ParticleSystem _particleSystem;
+    private float _saturationValueCA = 0;
+
+    private Coroutine _deadCoroutine;
+
+    private void Awake(){
+        volume.profile.TryGet<ColorAdjustments>(out CA);
+        _saturationValueCA = CA.saturation.value;
         Instance = this;
-        string lang = "ru";
+        string lang = "en";
         switch (lang){
             case "ru":
                 _scoreString = "Очки: ";
+                restartText.text = "Рестарт";
                 break;
             case "en":
                 _scoreString = "Score: ";
+                restartText.text = "Restart";
                 break;
         }
 
-
         UpdateUIScore();
-        StartCoroutine(StartLevel());
     }
 
-    public void Update(){
-        if (Input.GetKeyDown(KeyCode.R)){
-            _score = 0;
-            UpdateUIScore();
-            StartCoroutine(UnloadScene(false));
-        }
+    private void Start(){
+        StartCoroutine(StartLevel());
     }
 
     private IEnumerator StartLevel(){
@@ -48,9 +58,10 @@ public class GameManager : MonoBehaviour{
             yield return null;
         }
 
+        _particleSystem = FindObjectOfType<ParticleSystem>();
         _amountOfItems = CircleCreatorItems.Instance.AmountOfItems;
         while (curtain.alpha > 0){
-            curtain.alpha -= 0.03f;
+            curtain.alpha -= 0.05f;
             yield return null;
         }
     }
@@ -77,8 +88,32 @@ public class GameManager : MonoBehaviour{
         _score++;
         UpdateUIScore();
         if (_amountOfItems == 0){
+            Player.Instance.SavePos();
             StartCoroutine(UnloadScene(true));
         }
+    }
+
+    public void LoseGame(){
+        Player.Instance.SavePos();
+        restartGamePanel.gameObject.SetActive(true);
+        _particleSystem.Play();
+        _deadCoroutine = StartCoroutine(DeadVisibleMode());
+    }
+
+    IEnumerator DeadVisibleMode(){
+        while (CA.saturation.value > -90f){
+            CA.saturation.value = CA.saturation.value - 0.5f;
+            yield return null;
+        }
+    }
+
+    public void RestartGame(){
+        StopCoroutine(_deadCoroutine);
+        CA.saturation.value = _saturationValueCA;
+        _score = 0;
+        UpdateUIScore();
+        StartCoroutine(UnloadScene(false));
+        restartGamePanel.gameObject.SetActive(false);
     }
 
     private void UpdateUIScore(){

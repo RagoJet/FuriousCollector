@@ -5,7 +5,6 @@ public class ThrowableObject : MonoBehaviour{
     public event Action<ThrowableObject> OnTimeOut;
     private float _time = 0;
 
-
     private void TimeOut(){
         OnTimeOut?.Invoke(this);
     }

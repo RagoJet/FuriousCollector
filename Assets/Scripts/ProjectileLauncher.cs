@@ -18,8 +18,7 @@ public class ProjectileLauncher : MonoBehaviour{
     private void Awake(){
         _startPos = new Vector3(transform.position.x, transform.position.y + 1.2f, transform.position.z);
     }
-
-
+    
     private void Update(){
         _timeFromLastThrow += Time.deltaTime;
         if (_timeFromLastThrow >= _timeToThrowObject){

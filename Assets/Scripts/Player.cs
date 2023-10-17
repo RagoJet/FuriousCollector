@@ -2,16 +2,18 @@ using UnityEngine;
 
 
 public class Player : MonoBehaviour{
-    private Animator _animator;
-    private static readonly int Die = Animator.StringToHash("Die");
-
+    public static Player Instance;
     private float _speed;
     private float _angle;
     private float _radius;
 
+    private Animator _animator;
+    private static readonly int Die = Animator.StringToHash("Die");
+
     private bool _isAlive = true;
 
     private void Awake(){
+        Instance = this;
         _animator = GetComponent<Animator>();
     }
 
@@ -37,7 +39,6 @@ public class Player : MonoBehaviour{
         }
     }
 
-
     private void OnTriggerEnter(Collider other){
         if (other.TryGetComponent(out CollectionItem item)){
             if (_isAlive){
@@ -46,11 +47,15 @@ public class Player : MonoBehaviour{
             }
         }
         else if (other.TryGetComponent(out ThrowableObject throwableObject)){
+            GameManager.Instance.LoseGame();
             _isAlive = false;
             transform.position = new Vector3(transform.position.x, 0.25f, transform.position.z);
             _animator.SetTrigger(Die);
-            PlayerSettings.Instance.angle = _angle;
-            PlayerSettings.Instance.speed = _speed;
         }
+    }
+
+    public void SavePos(){
+        PlayerSettings.Instance.angle = _angle;
+        PlayerSettings.Instance.speed = _speed;
     }
 }
