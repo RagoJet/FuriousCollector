@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Level Western.unity
-    guid: 4eae80dc87be2344e86bf732ee36159c
+    path: Assets/Scenes/Level Zombie.unity
+    guid: aafc20d10ff23c5468d8edaaa3149d29
   - enabled: 1
     path: Assets/Scenes/Level Town.unity
     guid: 58bb5ca8f2df43a4aa2e7631ff56d0bc
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level Snow.unity
     guid: 5678f33e29b9e1d47b0be69ced53bbdb
+  - enabled: 1
+    path: Assets/Scenes/Level Western.unity
+    guid: 4eae80dc87be2344e86bf732ee36159c
   m_configObjects: {}
