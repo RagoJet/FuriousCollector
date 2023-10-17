@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour{
             yield return null;
         }
 
-        _particleSystem = FindObjectOfType<ParticleSystem>();
+        _particleSystem = GameObject.Find("FXGameOver").GetComponent<ParticleSystem>();
         _amountOfItems = CircleCreatorItems.Instance.AmountOfItems;
         while (curtain.alpha > 0){
             curtain.alpha -= 0.05f;
