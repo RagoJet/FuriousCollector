@@ -108,10 +108,10 @@ public class GameManager : MonoBehaviour{
     }
 
     public void RestartGame(){
-        StopCoroutine(_deadCoroutine);
-        CA.saturation.value = _saturationValueCA;
         _score = 0;
         UpdateUIScore();
+        StopCoroutine(_deadCoroutine);
+        CA.saturation.value = _saturationValueCA;
         StartCoroutine(UnloadScene(false));
         restartGamePanel.gameObject.SetActive(false);
     }
