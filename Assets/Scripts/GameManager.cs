@@ -94,7 +94,6 @@ public class GameManager : MonoBehaviour{
     }
 
     public void LoseGame(){
-        Player.Instance.SavePos();
         restartGamePanel.gameObject.SetActive(true);
         _particleSystem.Play();
         _deadCoroutine = StartCoroutine(DeadVisibleMode());

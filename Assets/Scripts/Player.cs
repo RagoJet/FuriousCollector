@@ -47,6 +47,7 @@ public class Player : MonoBehaviour{
             }
         }
         else if (other.TryGetComponent(out ThrowableObject throwableObject)){
+            SavePos();
             GameManager.Instance.LoseGame();
             _isAlive = false;
             transform.position = new Vector3(transform.position.x, 0.25f, transform.position.z);
