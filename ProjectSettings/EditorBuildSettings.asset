@@ -9,11 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Level Zombie.unity
-    guid: aafc20d10ff23c5468d8edaaa3149d29
+    path: Assets/Scenes/Level Lotr.unity
+    guid: ad4fd0cdc52d7c743aa8c1d05203edc2
+  - enabled: 1
+    path: Assets/Scenes/Level SkiFI.unity
+    guid: a3e68e12511c7f7438e5aac18aca1c38
   - enabled: 1
     path: Assets/Scenes/Level Knight.unity
     guid: f0962673fa516af4cab717990b172d6e
+  - enabled: 1
+    path: Assets/Scenes/Level Pirates.unity
+    guid: b74784e4e9cecfb4f8b3bb195a23b654
+  - enabled: 1
+    path: Assets/Scenes/Level Zombie.unity
+    guid: aafc20d10ff23c5468d8edaaa3149d29
   - enabled: 1
     path: Assets/Scenes/Level Town.unity
     guid: 58bb5ca8f2df43a4aa2e7631ff56d0bc
