@@ -1,11 +1,14 @@
 using UnityEngine;
 
-
 public class Player : MonoBehaviour{
     public static Player Instance;
     private float _speed;
     private float _angle;
     private float _radius;
+
+    public float Angle => _angle;
+
+    public float Speed => _speed;
 
     private Animator _animator;
     private static readonly int Die = Animator.StringToHash("Die");
@@ -18,9 +21,9 @@ public class Player : MonoBehaviour{
     }
 
     private void Start(){
-        _radius = PlayerSettings.Instance.radius;
-        _speed = PlayerSettings.Instance.speed;
-        _angle = PlayerSettings.Instance.angle;
+        _radius = ParametersOfPlayer.Instance.radius;
+        _speed = ParametersOfPlayer.Instance.speed;
+        _angle = ParametersOfPlayer.Instance.angle;
     }
 
     private void Update(){
@@ -43,7 +46,7 @@ public class Player : MonoBehaviour{
         if (other.TryGetComponent(out CollectionItem item)){
             if (_isAlive){
                 GameManager.Instance.AddScore();
-                Destroy(item.gameObject);
+                item.HideSelf();
             }
         }
         else if (other.TryGetComponent(out ThrowableObject throwableObject)){
@@ -58,7 +61,7 @@ public class Player : MonoBehaviour{
     }
 
     public void SavePos(){
-        PlayerSettings.Instance.angle = _angle;
-        PlayerSettings.Instance.speed = _speed;
+        ParametersOfPlayer.Instance.angle = _angle;
+        ParametersOfPlayer.Instance.speed = _speed;
     }
 }

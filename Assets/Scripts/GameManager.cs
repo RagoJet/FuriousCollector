@@ -5,17 +5,22 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YG;
 
 public class GameManager : MonoBehaviour{
     public static GameManager Instance;
+    [SerializeField] private CanvasGroup curtain;
+    [SerializeField] CircleCreatorItems creatorItems;
 
     public int LevelGame => _levelGame;
     private int _levelGame = 1;
 
+    [SerializeField] private TextMeshProUGUI bestScoreText;
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private CanvasGroup curtain;
     private string _scoreString;
+    string _bestScoreString;
     private int _score = 0;
+    private int _bestScore = 0;
 
     private int _amountOfItems;
 
@@ -29,26 +34,38 @@ public class GameManager : MonoBehaviour{
 
     private Coroutine _deadCoroutine;
 
+    private void OnEnable() => YandexGame.GetDataEvent += Init;
+
+    private void OnDisable() => YandexGame.GetDataEvent -= Init;
+
     private void Awake(){
+        if (YandexGame.SDKEnabled == true){
+            Init();
+        }
+    }
+
+    private void Init(){
+        _bestScore = YandexGame.savesData.bestScore;
         volume.profile.TryGet<ColorAdjustments>(out CA);
         _saturationValueCA = CA.saturation.value;
         Instance = this;
-        string lang = "en";
+        string lang = YandexGame.savesData.language;
         switch (lang){
             case "ru":
                 _scoreString = "Очки: ";
+                _bestScoreString = "Рекорд: ";
                 restartText.text = "Рестарт";
+
                 break;
             case "en":
                 _scoreString = "Score: ";
+                _bestScoreString = "Best score: ";
                 restartText.text = "Restart";
                 break;
         }
 
         UpdateUIScore();
-    }
-
-    private void Start(){
+        UpdateUIBestScore();
         StartCoroutine(StartLevel());
     }
 
@@ -59,11 +76,14 @@ public class GameManager : MonoBehaviour{
         }
 
         _particleSystem = GameObject.Find("FXGameOver").GetComponent<ParticleSystem>();
-        _amountOfItems = CircleCreatorItems.Instance.AmountOfItems;
+        _amountOfItems = creatorItems.AmountOfItems;
+
         while (curtain.alpha > 0){
-            curtain.alpha -= 0.05f;
+            curtain.alpha -= 0.1f;
             yield return null;
         }
+
+        creatorItems.Init();
     }
 
     private IEnumerator UnloadScene(bool nextOrRestartLevel){
@@ -94,6 +114,14 @@ public class GameManager : MonoBehaviour{
     }
 
     public void LoseGame(){
+        if (_score > _bestScore){
+            _bestScore = _score;
+            UpdateUIBestScore();
+            YandexGame.savesData.bestScore = _bestScore;
+            YandexGame.SaveProgress();
+            YandexGame.NewLeaderboardScores("LeaderBoardFC", _bestScore);
+        }
+
         restartGamePanel.gameObject.SetActive(true);
         _particleSystem.Play();
         _deadCoroutine = StartCoroutine(DeadVisibleMode());
@@ -117,5 +145,9 @@ public class GameManager : MonoBehaviour{
 
     private void UpdateUIScore(){
         scoreText.text = _scoreString + _score;
+    }
+
+    private void UpdateUIBestScore(){
+        bestScoreText.text = _bestScoreString + _bestScore;
     }
 }

@@ -10,7 +10,7 @@ public class ThrowableObject : MonoBehaviour{
     }
 
     private void Update(){
-        transform.Translate(Vector3.forward * Time.deltaTime * 9.5f);
+        transform.Translate(Vector3.forward * Time.deltaTime * 7f);
 
         _time += Time.deltaTime;
         if (_time >= 2f){
