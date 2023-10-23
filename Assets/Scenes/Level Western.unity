@@ -10083,8 +10083,6 @@ MonoBehaviour:
   - {fileID: 7904705648496238441, guid: 4316bf921b2629b4d9473729c37b658d, type: 3}
   - {fileID: 2585914985461021441, guid: 754a8096b87c61846bda1f076ddf9bc1, type: 3}
   - {fileID: 317931038888774647, guid: eea9b42ab25eb5a45a196b2ce0f56eba, type: 3}
-  minTimeToThrow: 0.15
-  maxTimeToThrow: 1.3
 --- !u!4 &7135153722189391357
 Transform:
   m_ObjectHideFlags: 0

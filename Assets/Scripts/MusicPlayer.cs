@@ -1,9 +1,10 @@
-using System;
 using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour{
+    [SerializeField] AudioClip newLevelClip;
+    [SerializeField] AudioClip[] deathClips;
     [SerializeField] AudioClip[] musicClips;
-    private AudioSource _audioSource;
+    AudioSource _audioSource;
     private int _musicCount = 0;
 
     private void Awake(){
@@ -15,7 +16,7 @@ public class MusicPlayer : MonoBehaviour{
     private void Update(){
         if (!_audioSource.isPlaying){
             _musicCount++;
-            if (_musicCount >= _musicCount){
+            if (_musicCount >= musicClips.Length){
                 _musicCount = 0;
                 ShuffleMusics();
             }
@@ -32,5 +33,13 @@ public class MusicPlayer : MonoBehaviour{
             int k = rng.Next(n + 1);
             (musicClips[k], musicClips[n]) = (musicClips[n], musicClips[k]);
         }
+    }
+
+    public void PlayDeathSound(){
+        _audioSource.PlayOneShot(deathClips[Random.Range(0, deathClips.Length)]);
+    }
+
+    public void PlayNewLevelSound(){
+        _audioSource.PlayOneShot(newLevelClip);
     }
 }

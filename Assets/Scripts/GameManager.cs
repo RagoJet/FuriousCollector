@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour{
     [SerializeField] private CanvasGroup curtain;
     [SerializeField] CircleCreatorItems creatorItems;
 
+    [SerializeField] private MusicPlayer musicPlayer;
     public int LevelGame => _levelGame;
     private int _levelGame = 1;
+    private int _countOfScenes;
 
     [SerializeField] private TextMeshProUGUI bestScoreText;
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -28,10 +30,9 @@ public class GameManager : MonoBehaviour{
     [SerializeField] private TextMeshProUGUI restartText;
 
     [SerializeField] Volume volume;
-    private ColorAdjustments CA;
+    private ColorAdjustments _CA;
+    float _caSaturationValue = 0;
     private ParticleSystem _particleSystem;
-    private float _saturationValueCA = 0;
-
     private Coroutine _deadCoroutine;
 
     private void OnEnable() => YandexGame.GetDataEvent += Init;
@@ -46,8 +47,6 @@ public class GameManager : MonoBehaviour{
 
     private void Init(){
         _bestScore = YandexGame.savesData.bestScore;
-        volume.profile.TryGet<ColorAdjustments>(out CA);
-        _saturationValueCA = CA.saturation.value;
         Instance = this;
         string lang = YandexGame.savesData.language;
         switch (lang){
@@ -64,8 +63,13 @@ public class GameManager : MonoBehaviour{
                 break;
         }
 
+
+        volume.profile.TryGet<ColorAdjustments>(out _CA);
+        _caSaturationValue = _CA.saturation.value;
+
         UpdateUIScore();
         UpdateUIBestScore();
+        _countOfScenes = SceneManager.sceneCountInBuildSettings;
         StartCoroutine(StartLevel());
     }
 
@@ -76,14 +80,15 @@ public class GameManager : MonoBehaviour{
         }
 
         _particleSystem = GameObject.Find("FXGameOver").GetComponent<ParticleSystem>();
-        _amountOfItems = creatorItems.AmountOfItems;
 
+        musicPlayer.PlayNewLevelSound();
         while (curtain.alpha > 0){
             curtain.alpha -= 0.1f;
             yield return null;
         }
 
         creatorItems.Init();
+        _amountOfItems = creatorItems.AmountOfItems;
     }
 
     private IEnumerator UnloadScene(bool nextOrRestartLevel){
@@ -95,9 +100,13 @@ public class GameManager : MonoBehaviour{
 
         if (nextOrRestartLevel){
             _levelGame++;
+            if (_levelGame >= _countOfScenes){
+                _levelGame = 1;
+            }
         }
         else{
             _levelGame = 1;
+            _score = 0;
         }
 
         StartCoroutine(StartLevel());
@@ -122,23 +131,24 @@ public class GameManager : MonoBehaviour{
             YandexGame.NewLeaderboardScores("LeaderBoardFC", _bestScore);
         }
 
+        musicPlayer.PlayDeathSound();
         restartGamePanel.gameObject.SetActive(true);
         _particleSystem.Play();
         _deadCoroutine = StartCoroutine(DeadVisibleMode());
     }
 
     IEnumerator DeadVisibleMode(){
-        while (CA.saturation.value > -90f){
-            CA.saturation.value = CA.saturation.value - 0.5f;
+        while (_CA.saturation.value > -90f){
+            _CA.saturation.value = _CA.saturation.value - 0.5f;
             yield return null;
         }
     }
 
     public void RestartGame(){
-        _score = 0;
         UpdateUIScore();
+        _CA.saturation.value = _caSaturationValue;
         StopCoroutine(_deadCoroutine);
-        CA.saturation.value = _saturationValueCA;
+        YandexGame.FullscreenShow();
         StartCoroutine(UnloadScene(false));
         restartGamePanel.gameObject.SetActive(false);
     }

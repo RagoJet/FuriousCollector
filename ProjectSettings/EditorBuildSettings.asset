@@ -18,14 +18,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Level Snow.unity
     guid: 5678f33e29b9e1d47b0be69ced53bbdb
   - enabled: 1
-    path: Assets/Scenes/Level Zombie.unity
-    guid: aafc20d10ff23c5468d8edaaa3149d29
-  - enabled: 1
     path: Assets/Scenes/Level Western.unity
     guid: 4eae80dc87be2344e86bf732ee36159c
   - enabled: 1
     path: Assets/Scenes/Level Pirates.unity
     guid: b74784e4e9cecfb4f8b3bb195a23b654
+  - enabled: 1
+    path: Assets/Scenes/Level Lotr.unity
+    guid: ad4fd0cdc52d7c743aa8c1d05203edc2
   - enabled: 1
     path: Assets/Scenes/Level Knight.unity
     guid: f0962673fa516af4cab717990b172d6e
@@ -33,6 +33,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level SkiFI.unity
     guid: a3e68e12511c7f7438e5aac18aca1c38
   - enabled: 1
-    path: Assets/Scenes/Level Lotr.unity
-    guid: ad4fd0cdc52d7c743aa8c1d05203edc2
+    path: Assets/Scenes/Level Zombie.unity
+    guid: aafc20d10ff23c5468d8edaaa3149d29
   m_configObjects: {}

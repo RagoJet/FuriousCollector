@@ -8,9 +8,9 @@ public class ProjectileLauncher : MonoBehaviour{
     [SerializeField] private ThrowableObject[] throwableObjects;
     private ObjectPoolT<ThrowableObject> _throwablePool = new();
 
-    private float minTimeToThrow = 0.15f;
-    private float maxTimeToThrow = 0.6f;
-    private float _timeToThrowObject = 0.8f;
+    private float minTimeToThrow = 0.12f;
+    private float maxTimeToThrow = 0.5f;
+    private float _timeToThrowObject = 0.55f;
     private float _timeFromLastThrow = 0;
 
     private Vector3 _startPos;

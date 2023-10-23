@@ -206,7 +206,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -460,55 +460,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &832575517
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 832575519}
-  - component: {fileID: 832575518}
-  m_Layer: 0
-  m_Name: Global Volume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &832575518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832575517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
---- !u!4 &832575519
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832575517}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &840146771
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +565,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'BestScore:'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 623247fc56972554aacfd6e3250d80e1, type: 2}
   m_sharedMaterial: {fileID: -8360455427843855797, guid: 623247fc56972554aacfd6e3250d80e1,
@@ -692,6 +643,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853633172}
   m_CullTransparentMesh: 1
+--- !u!1 &1022097188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1022097190}
+  - component: {fileID: 1022097189}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1022097189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022097188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+--- !u!4 &1022097190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022097188}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0000000074505797, w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1202578558
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score:'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 623247fc56972554aacfd6e3250d80e1, type: 2}
   m_sharedMaterial: {fileID: -8360455427843855797, guid: 623247fc56972554aacfd6e3250d80e1,
@@ -1459,10 +1459,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f6db71c18b03f43b2313f399080539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpItemClip: {fileID: 8300000, guid: efbf91eb45da0f343ba294da906be4c0, type: 3}
+  newLevelClip: {fileID: 8300000, guid: 5fda03b8b5f0e734bb6c8606137a5cc3, type: 3}
+  deathClips:
+  - {fileID: 8300000, guid: 870b60cab4b77fb4dbdd6ef279725a07, type: 3}
+  - {fileID: 8300000, guid: 08593fad1b3f74f48877c35c7881e826, type: 3}
+  - {fileID: 8300000, guid: 016f7c1fa3d9a1842904f422936bca4f, type: 3}
   musicClips:
   - {fileID: 8300000, guid: dc2694d030af1ff478e427d3c965b2b2, type: 3}
   - {fileID: 8300000, guid: 943805adafa3400488e698ce839b6e7e, type: 3}
-  - {fileID: 8300000, guid: 27a69a9d0e2a1b04894798f66292a218, type: 3}
+  - {fileID: 8300000, guid: 70b48633acaa8204b86a77deb31e243e, type: 3}
 --- !u!82 &1910681384
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1475,7 +1481,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1681,11 +1687,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curtain: {fileID: 1715367283}
   creatorItems: {fileID: 1801054799}
+  musicPlayer: {fileID: 1910681383}
   bestScoreText: {fileID: 853633174}
   scoreText: {fileID: 1232365105}
   restartGamePanel: {fileID: 1845673317}
   restartText: {fileID: 1241606933}
-  volume: {fileID: 832575518}
+  volume: {fileID: 1022097189}
 --- !u!4 &2129714003
 Transform:
   m_ObjectHideFlags: 0

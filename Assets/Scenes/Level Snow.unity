@@ -12296,8 +12296,6 @@ MonoBehaviour:
   player: {fileID: 6444163756679342856}
   throwableObjects:
   - {fileID: 7623014125965890772, guid: fec66bd69a91be644b2c5d71f648a3cc, type: 3}
-  minTimeToThrow: 0.15
-  maxTimeToThrow: 1.3
 --- !u!4 &679460743627458333
 Transform:
   m_ObjectHideFlags: 0
