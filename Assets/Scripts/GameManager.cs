@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour{
     private int _levelGame = 1;
     private int _countOfScenes;
 
+    [SerializeField] private LeaderboardYG leaderboardYg;
+    [SerializeField] private Text topPlayersText;
     [SerializeField] private TextMeshProUGUI bestScoreText;
     [SerializeField] private TextMeshProUGUI scoreText;
     private string _scoreString;
@@ -51,12 +53,14 @@ public class GameManager : MonoBehaviour{
         string lang = YandexGame.savesData.language;
         switch (lang){
             case "ru":
+                topPlayersText.text = "Лучшие игроки";
                 _scoreString = "Очки: ";
                 _bestScoreString = "Рекорд: ";
                 restartText.text = "Рестарт";
 
                 break;
             case "en":
+                topPlayersText.text = "Top players";
                 _scoreString = "Score: ";
                 _bestScoreString = "Best score: ";
                 restartText.text = "Restart";
@@ -129,6 +133,7 @@ public class GameManager : MonoBehaviour{
             YandexGame.savesData.bestScore = _bestScore;
             YandexGame.SaveProgress();
             YandexGame.NewLeaderboardScores("LeaderBoardFC", _bestScore);
+            leaderboardYg.UpdateLB();
         }
 
         musicPlayer.PlayDeathSound();
